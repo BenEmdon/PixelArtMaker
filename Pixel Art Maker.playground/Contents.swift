@@ -1,11 +1,13 @@
 import UIKit
 import PlaygroundSupport
 
-
+typealias PixelArtMaker = CanvasController
 class CanvasController: UIView {
 	let canvas: Canvas
 	let width: Int
 	let pixelSize: CGFloat
+	var colorPallet: [UIColor] = []
+
 	var currentPaintBrush = UIColor.darkGray {
 		didSet {
 			canvas.paintBrushColor = currentPaintBrush
@@ -33,9 +35,9 @@ class CanvasController: UIView {
 }
 
 let pixelSize: CGFloat = 20
-let heightInPixels: Int = 15
+let heightInPixels: Int = 10
 let canvasDefaultColor: UIColor = .white
 
+let pixelArtMaker = PixelArtMaker(width: heightInPixels, height: heightInPixels, pixelSize: pixelSize)
 
-PlaygroundPage.current.liveView = CanvasController(width: heightInPixels, height: heightInPixels, pixelSize: pixelSize)
-
+PlaygroundPage.current.liveView = pixelArtMaker
