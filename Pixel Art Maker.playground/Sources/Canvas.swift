@@ -2,26 +2,21 @@ import UIKit
 
 public class Canvas: UIView {
 	class Pixel: UIView {
-		override var backgroundColor: UIColor? {
-			willSet {
-				lastBackgroundColor = backgroundColor
-			}
-		}
-		var lastBackgroundColor: UIColor? = nil
 	}
 
 	var pixels: Array<Array<Pixel>>!
 	let width: Int
 	let height: Int
 	let pixelSize: CGFloat
-	public var canvasDefaultColor = UIColor.white
+	let canvasDefaultColor: UIColor
 	public var paintBrushColor = UIColor.black
 	var lastTouched = Set<Pixel>()
 
-	public init(width: Int, height: Int, pixelSize: CGFloat) {
+	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor) {
 		self.width = width
 		self.height = height
 		self.pixelSize = pixelSize
+		canvasDefaultColor = canvasColor
 		super.init(frame: CGRect(x: 0, y: 0, width:  CGFloat(width) * pixelSize, height: CGFloat(height) * pixelSize))
 
 		setupView()

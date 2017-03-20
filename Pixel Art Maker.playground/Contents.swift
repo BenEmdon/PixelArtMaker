@@ -3,8 +3,8 @@ import PlaygroundSupport
 
 let pixelSize: CGFloat = 15
 let heightInPixels: Int = 20
-let canvasDefaultColor: UIColor = .white
+let canvasDefaultColor: UIColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
 
-let pixelArtMaker = PixelArtMaker(width: heightInPixels, height: heightInPixels, pixelSize: pixelSize, canvasColor: .white, colors: [.white, .blue, .red, .green, .purple, .black, .darkGray])
+let pixelArtMaker = CanvasController(width: heightInPixels, height: heightInPixels, pixelSize: pixelSize, canvasColor: canvasDefaultColor, colors: [.white, .blue, .red, .green, .purple, .black, .darkGray])
 
 PlaygroundPage.current.liveView = pixelArtMaker

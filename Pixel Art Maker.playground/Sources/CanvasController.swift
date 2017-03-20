@@ -1,6 +1,6 @@
 import UIKit
 
-public typealias PixelArtMaker = CanvasController
+//public typealias PixelArtMaker = CanvasController
 public class CanvasController: UIView {
 	let canvas: Canvas
 	let pallet: Pallet
@@ -20,10 +20,10 @@ public class CanvasController: UIView {
 		self.height = height
 		self.pixelSize = pixelSize
 		self.colors = Array(colors.filter{ $0 != canvasColor }) + [canvasColor]
-		currentPaintBrush = self.colors.first!
 
-		canvas = Canvas(width: width, height: height, pixelSize: pixelSize)
+		canvas = Canvas(width: width, height: height, pixelSize: pixelSize, canvasColor: canvasColor)
 		pallet = Pallet(colors: self.colors)
+
 		super.init(frame: CGRect(
 			x: 0,
 			y: 0,
