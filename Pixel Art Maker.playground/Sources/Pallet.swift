@@ -6,7 +6,7 @@ protocol PalletDelegate: class {
 
 class Pallet: UIView {
 	let colors: [UIColor]
-	var stackView: UIStackView!
+	let stackView = UIStackView()
 	weak var delegate: PalletDelegate?
 
 	init(colors: [UIColor]) {
@@ -38,8 +38,7 @@ class Pallet: UIView {
 
 	func setupViews() {
 		backgroundColor = .white
-		
-		stackView = UIStackView()
+
 		stackView.axis = .vertical
 		stackView.distribution = .fillEqually
 		stackView.spacing = 1
@@ -48,6 +47,7 @@ class Pallet: UIView {
 			let button = UIButton()
 			button.backgroundColor = color
 			button.layer.borderWidth = 1
+			button.layer.borderColor = UIColor.darkGray.cgColor
 			button.addTarget(self, action: #selector(handleColorSelected(sender:)), for: .touchUpInside)
 			stackView.addArrangedSubview(button)
 		}
@@ -62,7 +62,10 @@ class Pallet: UIView {
 	}
 
 	func handleColorSelected(sender: UIButton) {
-		sender.layer.borderWidth = 1
+		stackView.arrangedSubviews.forEach { (view) in
+			view.layer.borderColor = UIColor.darkGray.cgColor
+		}
+		sender.layer.borderColor = Styles.gold.cgColor
 		delegate?.paintBrushDidChange(color: sender.backgroundColor!)
 	}
 }

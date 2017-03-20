@@ -9,7 +9,7 @@ public class CanvasController: UIView {
 	let pixelSize: CGFloat
 	let colors: Array<UIColor>
 
-	var currentPaintBrush: UIColor {
+	var currentPaintBrush: UIColor = .black {
 		didSet {
 			canvas.paintBrushColor = currentPaintBrush
 		}
@@ -38,6 +38,10 @@ public class CanvasController: UIView {
 	}
 
 	func setupViews() {
+		if let startingPaintBrush = self.colors.first {
+			currentPaintBrush = startingPaintBrush
+		}
+
 		backgroundColor = .white
 		pallet.delegate = self
 		addSubview(canvas)
