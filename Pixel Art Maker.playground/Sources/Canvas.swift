@@ -10,6 +10,7 @@ public class Canvas: UIView {
 	let pixelSize: CGFloat
 	let canvasDefaultColor: UIColor
 	public var paintBrushColor = UIColor.black
+	var viewModel: CanvasViewModel
 	var lastTouched = Set<Pixel>()
 
 	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor) {
@@ -17,8 +18,9 @@ public class Canvas: UIView {
 		self.height = height
 		self.pixelSize = pixelSize
 		canvasDefaultColor = canvasColor
+		viewModel = CanvasViewModel()
 		super.init(frame: CGRect(x: 0, y: 0, width:  CGFloat(width) * pixelSize, height: CGFloat(height) * pixelSize))
-
+		viewModel.delegate = self
 		setupView()
 	}
 
@@ -45,7 +47,7 @@ public class Canvas: UIView {
 		let dragGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleDrag(sender:)))
 		dragGestureRecognizer.minimumPressDuration = 0
 		addGestureRecognizer(dragGestureRecognizer)
-		addGestureRecognizer(tapGestureRecognizer)
+//		addGestureRecognizer(tapGestureRecognizer)
 
 		pixels = []
 		for heightIndex in 0..<height {
@@ -76,22 +78,27 @@ public class Canvas: UIView {
 
 	private dynamic func handleDrag(sender: UIGestureRecognizer) {
 		switch sender.state {
-		case .began:
-			lastTouched.removeAll()
-		case .changed, .ended:
-			guard let pixel = pixelFrom(point: sender.location(in: self)), !lastTouched.contains(pixel) else { return }
-			pixel.backgroundColor = paintBrushColor
-			lastTouched.insert(pixel)
+		case .began, .changed:
+			draw(atPoint: sender.location(in: self))
+		case .ended:
+			draw(atPoint: sender.location(in: self))
+			viewModel.endDrawing()
 		default: break
 		}
 
 	}
 
-	private func pixelFrom(point: CGPoint) -> Pixel? {
-		let heightIndex = Int(point.y / pixelSize)
-		let widthIndex = Int(point.x / pixelSize)
-		guard heightIndex < height && widthIndex < width && heightIndex >= 0 && widthIndex >= 0 else { return nil }
-		return pixels[heightIndex][widthIndex]
+	private func draw(atPoint point: CGPoint) {
+		let y = Int(point.y / pixelSize)
+		let x = Int(point.x / pixelSize)
+		guard y < height && x < width && y >= 0 && x >= 0 else { return }
+		viewModel.drawAt(x: x, y: y, color: paintBrushColor)
+	}
+}
+
+extension Canvas: CanvasDelegate {
+	func colorChanged(newPixelState pixelState: PixelState) {
+		pixels[pixelState.y][pixelState.x].backgroundColor = pixelState.color
 	}
 }
 

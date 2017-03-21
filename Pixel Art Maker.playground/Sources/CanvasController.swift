@@ -1,6 +1,5 @@
 import UIKit
 
-//public typealias PixelArtMaker = CanvasController
 public class CanvasController: UIView {
 	let canvas: Canvas
 	let pallet: Pallet
@@ -8,6 +7,7 @@ public class CanvasController: UIView {
 	let height: Int
 	let pixelSize: CGFloat
 	let colors: Array<UIColor>
+	let theme: Theme
 
 	var currentPaintBrush: UIColor = .black {
 		didSet {
@@ -15,15 +15,15 @@ public class CanvasController: UIView {
 		}
 	}
 
-	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colors: Set<UIColor>) {
+	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colors: [UIColor], theme: Theme) {
 		self.width = width
 		self.height = height
 		self.pixelSize = pixelSize
-		self.colors = Array(colors.filter{ $0 != canvasColor }) + [canvasColor]
+		self.colors = colors.filter{ $0 != canvasColor } + [canvasColor]
 
 		canvas = Canvas(width: width, height: height, pixelSize: pixelSize, canvasColor: canvasColor)
-		pallet = Pallet(colors: self.colors)
-
+		pallet = Pallet(colors: self.colors, theme: theme)
+		self.theme = theme
 		super.init(frame: CGRect(
 			x: 0,
 			y: 0,
@@ -41,8 +41,7 @@ public class CanvasController: UIView {
 		if let startingPaintBrush = self.colors.first {
 			currentPaintBrush = startingPaintBrush
 		}
-
-		backgroundColor = .white
+		backgroundColor = theme.mainColor
 		pallet.delegate = self
 		addSubview(canvas)
 		addSubview(pallet)
