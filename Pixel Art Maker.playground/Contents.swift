@@ -12,6 +12,6 @@ let pixelArtMaker = CanvasController(
 	pixelSize: pixelSize,
 	canvasColor: canvasDefaultColor,
 	colors: colors,
-	theme: .light)
+	theme: .dark)
 
 PlaygroundPage.current.liveView = pixelArtMaker

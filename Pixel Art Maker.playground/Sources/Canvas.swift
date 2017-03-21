@@ -47,7 +47,6 @@ public class Canvas: UIView {
 		let dragGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleDrag(sender:)))
 		dragGestureRecognizer.minimumPressDuration = 0
 		addGestureRecognizer(dragGestureRecognizer)
-//		addGestureRecognizer(tapGestureRecognizer)
 
 		pixels = []
 		for heightIndex in 0..<height {
@@ -85,7 +84,6 @@ public class Canvas: UIView {
 			viewModel.endDrawing()
 		default: break
 		}
-
 	}
 
 	private func draw(atPoint point: CGPoint) {
@@ -99,6 +97,14 @@ public class Canvas: UIView {
 extension Canvas: CanvasDelegate {
 	func colorChanged(newPixelState pixelState: PixelState) {
 		pixels[pixelState.y][pixelState.x].backgroundColor = pixelState.color
+	}
+
+	func clearCanvas() {
+		for row in pixels {
+			for pixel in row {
+				pixel.backgroundColor = canvasDefaultColor
+			}
+		}
 	}
 }
 

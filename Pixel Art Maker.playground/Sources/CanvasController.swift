@@ -3,6 +3,7 @@ import UIKit
 public class CanvasController: UIView {
 	let canvas: Canvas
 	let pallet: Pallet
+	let controlCenter: CanvasControlCenter
 	let width: Int
 	let height: Int
 	let pixelSize: CGFloat
@@ -23,12 +24,13 @@ public class CanvasController: UIView {
 
 		canvas = Canvas(width: width, height: height, pixelSize: pixelSize, canvasColor: canvasColor)
 		pallet = Pallet(colors: self.colors, theme: theme)
+		controlCenter = CanvasControlCenter(theme: theme)
 		self.theme = theme
 		super.init(frame: CGRect(
 			x: 0,
 			y: 0,
 			width:  CGFloat(width) * pixelSize + 80,
-			height: max(canvas.bounds.height, pallet.bounds.height) + 40))
+			height: max(canvas.bounds.height + controlCenter.bounds.height + Metrics.regular * 2, pallet.bounds.height) + Metrics.regular))
 
 		setupViews()
 	}
@@ -42,16 +44,36 @@ public class CanvasController: UIView {
 			currentPaintBrush = startingPaintBrush
 		}
 		backgroundColor = theme.mainColor
+
 		pallet.delegate = self
+		controlCenter.delegate = self
+
 		addSubview(canvas)
 		addSubview(pallet)
+		addSubview(controlCenter)
+
 		canvas.frame.origin = CGPoint(x: Metrics.regular, y: Metrics.regular)
 		pallet.frame.origin = CGPoint(x: CGFloat(width) * pixelSize + 30, y: Metrics.regular)
+		controlCenter.frame.origin = CGPoint(x: Metrics.regular, y: canvas.bounds.height + Metrics.regular * 2)
 	}
 }
 
 extension CanvasController: PalletDelegate {
 	func paintBrushDidChange(color: UIColor) {
 		currentPaintBrush = color
+	}
+}
+
+extension CanvasController: CanvasControlCenterDelegate {
+	func redoPressed() {
+		canvas.viewModel.redo()
+	}
+
+	func undoPressed() {
+		canvas.viewModel.undo()
+	}
+
+	func savePressed() {
+		print("trynna save")
 	}
 }

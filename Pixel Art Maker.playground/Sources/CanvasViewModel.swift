@@ -2,10 +2,10 @@ import UIKit
 
 protocol CanvasDelegate: class {
 	func colorChanged(newPixelState pixelState: PixelState)
+	func clearCanvas()
 }
 
 public struct CanvasState {
-//	let canvasColor: UIColor
 	let state: Set<PixelState>
 }
 
@@ -73,16 +73,10 @@ struct CanvasViewModel {
 	mutating func undo() {
 		guard let lastDraw = stateHistory.popLast() else { return }
 
-		var pointAndStates: [Point: PixelState] = [:]
-		let pixelsInOrder: Array<PixelState> = stateHistory.flatMap { (canvasState) -> Array<PixelState> in
-			return Array(canvasState.state)
+		delegate?.clearCanvas()
+		for state in stateHistory {
+			apply(canvasState: state)
 		}
-		let points = pixelsInOrder.map { Point(x: $0.x, y: $0.y) }
-		for (pixelState, point) in zip(pixelsInOrder, points) {
-			pointAndStates[point] = pixelState
-		}
-
-		apply(canvasState: CanvasState(state: Set(pointAndStates.values)))
 		undoneChanges.append(lastDraw)
 	}
 
