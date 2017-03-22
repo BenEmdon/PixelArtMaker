@@ -33,8 +33,8 @@ public class CanvasController: UIView {
 		super.init(frame: CGRect(
 			x: 0,
 			y: 0,
-			width:  CGFloat(width) * pixelSize + 80,
-			height: max(canvas.bounds.height + controlCenter.bounds.height + Metrics.regular * 2, pallet.bounds.height) + Metrics.regular))
+			width:  max(controlCenter.bounds.width + pallet.bounds.width + Metrics.regular * 4, CGFloat(width) * pixelSize + Metrics.regular * 4),
+			height: max(canvas.bounds.height + controlCenter.bounds.height + Metrics.regular * 3, pallet.bounds.height + Metrics.regular * 2 )))
 
 		setupViews()
 	}
@@ -57,8 +57,15 @@ public class CanvasController: UIView {
 		addSubview(controlCenter)
 
 		canvas.frame.origin = CGPoint(x: Metrics.regular, y: Metrics.regular)
-		pallet.frame.origin = CGPoint(x: CGFloat(width) * pixelSize + 30, y: Metrics.regular)
-		controlCenter.frame.origin = CGPoint(x: Metrics.regular, y: canvas.bounds.height + Metrics.regular * 2)
+		controlCenter.frame.origin = CGPoint(
+			x: Metrics.regular,
+			y: canvas.bounds.height + Metrics.regular * 2
+		)
+		pallet.frame.origin = CGPoint(
+			x: max(CGFloat(width) * pixelSize + 30, controlCenter.bounds.width + Metrics.regular * 2),
+			y: Metrics.regular
+		)
+
 	}
 }
 
