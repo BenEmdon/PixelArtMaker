@@ -92,6 +92,32 @@ public class Canvas: UIView {
 		guard y < height && x < width && y >= 0 && x >= 0 else { return }
 		viewModel.drawAt(x: x, y: y, color: paintBrushColor)
 	}
+
+	private func removeGrid() {
+		for row in pixels {
+			for pixel in row {
+				pixel.layer.borderWidth = 0
+			}
+		}
+	}
+
+	private func addGrid() {
+		for row in pixels {
+			for pixel in row {
+				pixel.layer.borderWidth = 0.5
+			}
+		}
+	}
+
+	func makeImageFromSelf() -> UIImage {
+		removeGrid()
+		UIGraphicsBeginImageContext(self.frame.size)
+		layer.render(in: UIGraphicsGetCurrentContext()!)
+		let image = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		addGrid()
+		return image!
+	}
 }
 
 extension Canvas: CanvasDelegate {

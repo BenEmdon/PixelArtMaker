@@ -6,12 +6,16 @@ let heightInPixels: Int = 20
 let canvasDefaultColor: UIColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
 let colors: [UIColor] = [.white, .blue, .red, .green, .purple, .black, .darkGray]
 
+let path = playgroundSharedDataDirectory.appendingPathComponent("My-Pixel-Art.jpg")
+
 let pixelArtMaker = CanvasController(
 	width: heightInPixels,
 	height: heightInPixels,
 	pixelSize: pixelSize,
 	canvasColor: canvasDefaultColor,
 	colors: colors,
-	theme: .dark)
+	theme: .dark,
+	saveURL: path
+)
 
 PlaygroundPage.current.liveView = pixelArtMaker

@@ -9,6 +9,9 @@ public class CanvasController: UIView {
 	let pixelSize: CGFloat
 	let colors: Array<UIColor>
 	let theme: Theme
+	let saveURL: URL
+
+	static var numberOfSaves: Int = 0
 
 	var currentPaintBrush: UIColor = .black {
 		didSet {
@@ -16,11 +19,12 @@ public class CanvasController: UIView {
 		}
 	}
 
-	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colors: [UIColor], theme: Theme) {
+	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colors: [UIColor], theme: Theme, saveURL: URL) {
 		self.width = width
 		self.height = height
 		self.pixelSize = pixelSize
 		self.colors = colors.filter{ $0 != canvasColor } + [canvasColor]
+		self.saveURL = saveURL
 
 		canvas = Canvas(width: width, height: height, pixelSize: pixelSize, canvasColor: canvasColor)
 		pallet = Pallet(colors: self.colors, theme: theme)
@@ -75,5 +79,7 @@ extension CanvasController: CanvasControlCenterDelegate {
 
 	func savePressed() {
 		print("trynna save")
+		let image = canvas.makeImageFromSelf()
+		try? UIImagePNGRepresentation(image)?.write(to: saveURL, options: .atomic)
 	}
 }
