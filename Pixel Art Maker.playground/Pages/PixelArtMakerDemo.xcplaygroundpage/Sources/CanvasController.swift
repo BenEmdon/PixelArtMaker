@@ -1,5 +1,6 @@
 import UIKit
 
+/// The view-manager of the application. It manages the canvas and the canvas' set of controls.
 public class CanvasController: UIView {
 	let canvas: Canvas
 	let pallet: Pallet

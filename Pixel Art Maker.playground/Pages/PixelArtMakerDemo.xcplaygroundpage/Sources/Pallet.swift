@@ -45,11 +45,11 @@ class Pallet: UIView {
 		stackView.distribution = .fillEqually
 		stackView.spacing = 1
 
-		for color in colors {
+		for (index, color) in colors.enumerated() {
 			let button = UIButton()
 			button.backgroundColor = color
 			button.layer.borderWidth = 1
-			button.layer.borderColor = theme.palletDefaut.cgColor
+			button.layer.borderColor = index == 0 ? theme.palletSelected.cgColor : theme.palletDefaut.cgColor
 			button.addTarget(self, action: #selector(handleColorSelected(sender:)), for: .touchUpInside)
 			stackView.addArrangedSubview(button)
 		}

@@ -1,5 +1,6 @@
 import UIKit
 
+/// Theme is a set of colors to be applied to the canvas environment to easy viewing. 
 public enum Theme {
 	case light
 	case dark
