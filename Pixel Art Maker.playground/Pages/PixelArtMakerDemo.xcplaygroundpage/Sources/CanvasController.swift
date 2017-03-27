@@ -19,15 +19,15 @@ public class CanvasController: UIView {
 		}
 	}
 
-	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colors: [UIColor], theme: Theme, saveURL: URL) {
+	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colorPallet: [UIColor], theme: Theme, saveURL: URL) {
 		self.width = width
 		self.height = height
 		self.pixelSize = pixelSize
-		self.colors = colors.filter{ $0 != canvasColor } + [canvasColor]
+		self.colors = colorPallet.filter{ $0 != canvasColor } + [canvasColor]
 		self.saveURL = saveURL
 
 		canvas = Canvas(width: width, height: height, pixelSize: pixelSize, canvasColor: canvasColor)
-		pallet = Pallet(colors: self.colors, theme: theme)
+		pallet = Pallet(colors: colors, theme: theme)
 		controlCenter = CanvasControlCenter(theme: theme)
 		self.theme = theme
 		super.init(frame: CGRect(
