@@ -20,7 +20,7 @@ let heightWidthInPixels: Int = 15
 let pixelSize: CGFloat = 15
 let canvasDefaultColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 let colorPallet: [UIColor] = marioColorPallet
-let theme: Theme = .dark
+let theme: Theme = .dark // try .light too!
 
 //: Path corresponds to `/Users/{YOUR USER NAME}/Documents/Shared\ Playground\ Data`
 let path = playgroundSharedDataDirectory.appendingPathComponent("MyArt.jpg")
