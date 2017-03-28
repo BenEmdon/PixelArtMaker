@@ -3,7 +3,7 @@ import UIKit
 /// The view-manager of the application. It manages the canvas and the canvas' set of controls.
 public class CanvasController: UIView {
 	let canvas: Canvas
-	let pallet: Pallet
+	let palette: Palette
 	let controlCenter: CanvasControlCenter
 	let width: Int
 	let height: Int
@@ -20,22 +20,22 @@ public class CanvasController: UIView {
 		}
 	}
 
-	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colorPallet: [UIColor], theme: Theme, saveURL: URL) {
+	public init(width: Int, height: Int, pixelSize: CGFloat, canvasColor: UIColor, colorPalette: [UIColor], theme: Theme, saveURL: URL) {
 		self.width = width
 		self.height = height
 		self.pixelSize = pixelSize
-		self.colors = colorPallet.filter{ $0 != canvasColor } + [canvasColor]
+		self.colors = colorPalette.filter{ $0 != canvasColor } + [canvasColor]
 		self.saveURL = saveURL
 
 		canvas = Canvas(width: width, height: height, pixelSize: pixelSize, canvasColor: canvasColor)
-		pallet = Pallet(colors: colors, theme: theme)
+		palette = Palette(colors: colors, theme: theme)
 		controlCenter = CanvasControlCenter(theme: theme)
 		self.theme = theme
 		super.init(frame: CGRect(
 			x: 0,
 			y: 0,
-			width:  max(controlCenter.bounds.width + pallet.bounds.width + Metrics.regular * 4, CGFloat(width) * pixelSize + Metrics.regular * 4),
-			height: max(canvas.bounds.height + controlCenter.bounds.height + Metrics.regular * 3, pallet.bounds.height + Metrics.regular * 2 )))
+			width:  max(controlCenter.bounds.width + palette.bounds.width + Metrics.regular * 4, CGFloat(width) * pixelSize + Metrics.regular * 4),
+			height: max(canvas.bounds.height + controlCenter.bounds.height + Metrics.regular * 3, palette.bounds.height + Metrics.regular * 2 )))
 
 		setupViews()
 	}
@@ -50,11 +50,11 @@ public class CanvasController: UIView {
 		}
 		backgroundColor = theme.mainColor
 
-		pallet.delegate = self
+		palette.delegate = self
 		controlCenter.delegate = self
 
 		addSubview(canvas)
-		addSubview(pallet)
+		addSubview(palette)
 		addSubview(controlCenter)
 
 		canvas.frame.origin = CGPoint(x: Metrics.regular, y: Metrics.regular)
@@ -62,7 +62,7 @@ public class CanvasController: UIView {
 			x: Metrics.regular,
 			y: canvas.bounds.height + Metrics.regular * 2
 		)
-		pallet.frame.origin = CGPoint(
+		palette.frame.origin = CGPoint(
 			x: max(CGFloat(width) * pixelSize + 30, controlCenter.bounds.width + Metrics.regular * 2),
 			y: Metrics.regular
 		)
@@ -70,7 +70,7 @@ public class CanvasController: UIView {
 	}
 }
 
-extension CanvasController: PalletDelegate {
+extension CanvasController: PaletteDelegate {
 	func paintBrushDidChange(color: UIColor) {
 		currentPaintBrush = color
 	}

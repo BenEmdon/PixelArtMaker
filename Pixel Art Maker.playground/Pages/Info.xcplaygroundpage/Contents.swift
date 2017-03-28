@@ -18,7 +18,7 @@ You can either do single clicks to change pixels or you can click and drag!
 
 ### Changing Color 🎨
 ![ChangingColor](ChangingColor.gif)
-Give the `CanvasController` an array of colors (`[UIColor]`) to setup your pallet.
+Give the `CanvasController` an array of colors (`[UIColor]`) to setup your palette.
 
 ### Undo and Redo ↪️ ↩️
 ![UndoRedo](UndoRedo.gif)

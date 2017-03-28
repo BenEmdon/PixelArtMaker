@@ -1,14 +1,14 @@
 import UIKit
 
-protocol PalletDelegate: class {
+protocol PaletteDelegate: class {
 	func paintBrushDidChange(color: UIColor)
 }
 
-class Pallet: UIView {
+class Palette: UIView {
 	let colors: [UIColor]
 	let theme: Theme
 	let stackView = UIStackView()
-	weak var delegate: PalletDelegate?
+	weak var delegate: PaletteDelegate?
 
 	init(colors: [UIColor], theme: Theme) {
 		self.colors = colors
@@ -49,7 +49,7 @@ class Pallet: UIView {
 			let button = UIButton()
 			button.backgroundColor = color
 			button.layer.borderWidth = 1
-			button.layer.borderColor = index == 0 ? theme.palletSelected.cgColor : theme.palletDefaut.cgColor
+			button.layer.borderColor = index == 0 ? theme.paletteSelected.cgColor : theme.paletteDefaut.cgColor
 			button.addTarget(self, action: #selector(handleColorSelected(sender:)), for: .touchUpInside)
 			stackView.addArrangedSubview(button)
 		}
@@ -65,9 +65,9 @@ class Pallet: UIView {
 
 	func handleColorSelected(sender: UIButton) {
 		stackView.arrangedSubviews.forEach { (view) in
-			view.layer.borderColor = theme.palletDefaut.cgColor
+			view.layer.borderColor = theme.paletteDefaut.cgColor
 		}
-		sender.layer.borderColor = theme.palletSelected.cgColor
+		sender.layer.borderColor = theme.paletteSelected.cgColor
 		delegate?.paintBrushDidChange(color: sender.backgroundColor!)
 	}
 }

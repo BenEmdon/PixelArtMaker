@@ -23,7 +23,7 @@ public enum Theme {
 		}
 	}
 
-	var palletDefaut: UIColor {
+	var paletteDefaut: UIColor {
 		switch self {
 		case .light:
 			return .lightGray
@@ -32,7 +32,7 @@ public enum Theme {
 		}
 	}
 
-	var palletSelected: UIColor {
+	var paletteSelected: UIColor {
 		switch self {
 		case .light:
 			return Theme.xcodeDarkGray
