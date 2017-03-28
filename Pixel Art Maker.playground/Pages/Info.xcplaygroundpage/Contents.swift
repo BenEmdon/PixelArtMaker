@@ -6,7 +6,7 @@
 Miss all the pixel perfect art that was popular in the 80's? If so, Pixel Art Maker is for you! Try and replicate old classics like [Mario](https://en.wikipedia.org/wiki/Mario) or freestyle your own art! This playground app is here to promote creativity, but also bring the warm and fuzzy nostalgia associated with old videogames. 😊
 
 ### Inspiration:
-_Though I wasn't born in the 80's, growing up I was lucky enough to get my hands on old Nintendo games that have brought joy my whole life!_
+_Though I wasn't born in the 80's, growing up I was lucky enough to get my hands on old Nintendo games that have brought me joy my whole life!_
 
 ### Author: 
 [Ben Emdon 👨‍💻](https://github.com/BenEmdon)
