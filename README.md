@@ -9,6 +9,9 @@ _Though I wasn't born in the 80's, growing up I was lucky enough to get my hands
 ### Author:
 [Ben Emdon 👨‍💻](https://github.com/BenEmdon)
 
+# Screenshot:
+![Example](MarioExample.png)
+
 # Features:
 ### Drawing 🖌
 ![Drawing](PixelArtMaker.playground/Pages/Info.xcplaygroundpage/Resources/Drawing.gif)
