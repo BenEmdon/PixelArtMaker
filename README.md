@@ -1,6 +1,6 @@
 ![title](PixelArtMaker.playground/Resources/Pixel-art-maker.jpg)
 
-[![WWDC](https://img.shields.io/badge/WWDC%20Scholarship-winner-4099FF.svg)](https://developer.apple.com/wwdc)
+[![WWDC](https://img.shields.io/badge/WWDC%20Scholarship-Winner-4099FF.svg)](https://developer.apple.com/wwdc)
 
 # About:
 Miss all the pixel perfect art that was popular in the 80's? If so, Pixel Art Maker is for you! Try and replicate old classics like [Mario](https://en.wikipedia.org/wiki/Mario) or freestyle your own art! This playground app is here to promote creativity, but also bring the warm and fuzzy nostalgia associated with old videogames. 😊
@@ -39,5 +39,3 @@ Hitting the save button will make a pretty render of your art without the grid a
 In order to save your art you must ensure the following directory exists:
 
 `/Users/{YOUR USER NAME}/Documents/Shared\ Playground\ Data`
-
----
