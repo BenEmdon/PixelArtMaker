@@ -87,6 +87,15 @@ extension CanvasController: CanvasControlCenterDelegate {
 
 	func savePressed() {
 		let image = canvas.makeImageFromSelf()
-		try? UIImagePNGRepresentation(image)?.write(to: saveURL, options: .atomic)
+		do {
+			guard let image = UIImagePNGRepresentation(image) else {
+				return print("Couldn't get image from current context")
+			}
+			try image.write(to: saveURL, options: .atomic)
+			print("Save successful!")
+		} catch let error {
+			print("Error: \(error)")
+		}
+		
 	}
 }
