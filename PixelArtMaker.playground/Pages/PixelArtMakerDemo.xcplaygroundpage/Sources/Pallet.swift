@@ -63,7 +63,7 @@ class Palette: UIView {
 		)
 	}
 
-	func handleColorSelected(sender: UIButton) {
+	@objc func handleColorSelected(sender: UIButton) {
 		stackView.arrangedSubviews.forEach { (view) in
 			view.layer.borderColor = theme.paletteDefaut.cgColor
 		}

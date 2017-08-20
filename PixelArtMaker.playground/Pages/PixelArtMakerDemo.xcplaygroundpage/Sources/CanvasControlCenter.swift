@@ -56,15 +56,15 @@ class CanvasControlCenter: UIView {
 		stackView.addArrangedSubview(saveButton)
 	}
 
-	func undoButtonPressed() {
+	@objc func undoButtonPressed() {
 		delegate?.undoPressed()
 	}
 
-	func redoButtonPressed() {
+	@objc func redoButtonPressed() {
 		delegate?.redoPressed()
 	}
 
-	func saveButtonPressed() {
+	@objc func saveButtonPressed() {
 		delegate?.savePressed()
 	}
 }

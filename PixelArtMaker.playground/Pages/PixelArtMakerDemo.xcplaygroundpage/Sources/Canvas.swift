@@ -75,7 +75,7 @@ public class Canvas: UIView {
 		return pixel
 	}
 
-	private dynamic func handleDrag(sender: UIGestureRecognizer) {
+	@objc private func handleDrag(sender: UIGestureRecognizer) {
 		switch sender.state {
 		case .began, .changed:
 			draw(atPoint: sender.location(in: self))

@@ -86,7 +86,6 @@ extension CanvasController: CanvasControlCenterDelegate {
 	}
 
 	func savePressed() {
-		print("trynna save")
 		let image = canvas.makeImageFromSelf()
 		try? UIImagePNGRepresentation(image)?.write(to: saveURL, options: .atomic)
 	}
