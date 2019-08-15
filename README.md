@@ -39,3 +39,5 @@ Hitting the save button will make a pretty render of your art without the grid a
 In order to save your art you must ensure the following directory exists:
 
 `/Users/{YOUR USER NAME}/Documents/Shared\ Playground\ Data`
+
+{% is this -invalid\#() %}
